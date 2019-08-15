@@ -1,0 +1,23 @@
+<idea-plugin>
+    <id>ro.florinpatan.gopher</id>
+    <name>Gopher</name>
+    <vendor email="florinpatan@gmail.com">Florin Pățan</vendor>
+
+    <description><![CDATA[
+    The Gopher is here to enhance your Go (golang) development experience.<br>
+    <br>
+    <a href="https://www.jetbrains.com/go/learn/">Learn more about the IDE</a><br>
+    <br>
+    Gopher icon based on the gopher created by Renee French under Creative Commons 3.0 Attributions.<br><br>
+    This plugin is based on the <a href="https://plugins.jetbrains.com/plugin/8575-nyan-progress-bar">Nyan Progress Bar plugin</a> from Dmitry Batkovich.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.go</depends>
+
+    <application-components>
+        <component>
+            <implementation-class>ro.florinpatan.gopher.GopherApplicationComponent</implementation-class>
+        </component>
+    </application-components>
+</idea-plugin>
