@@ -31,5 +31,5 @@ publishPlugin {
 }
 
 publishPlugin {
-    channels 'beta'
+    channels intellijPublishChannel
 }
