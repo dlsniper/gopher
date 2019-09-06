@@ -12,9 +12,9 @@
     This plugin is based on the <a href="https://plugins.jetbrains.com/plugin/8575-nyan-progress-bar">Nyan Progress Bar plugin</a> from Dmitry Batkovich.
     ]]></description>
 
-    <change-notes>2019.2.3: Misc internal changes.</change-notes>
-
     <depends>com.intellij.modules.platform</depends>
+
+    <idea-version until-build="193." since-build="192.*"/>
 
     <application-components>
         <component>
