@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'ro.florinpatan.gopher'
-version '2019.2.1'
+version '2019.2.2'
 
 sourceCompatibility = 1.8
 
@@ -22,8 +22,9 @@ intellij {
 
 patchPluginXml {
     changeNotes """
-      2019.2.1: Added plugin icon
-      2019.2: Initial release"""
+      2019.2.2: Correct layout for the progress bar. Misc internal changes.
+      2019.2.1: Added plugin icon.<br>
+      2019.2: Initial release.<br>"""
 }
 
 publishPlugin {

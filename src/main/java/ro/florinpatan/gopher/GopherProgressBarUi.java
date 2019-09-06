@@ -18,6 +18,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.*;
 
+import static ro.florinpatan.gopher.GopherIcons.GOPHER_ICON;
+
 public class GopherProgressBarUi extends BasicProgressBarUI {
     private static final float[] FRACTIONS = {0.5f, 1f};
     private static final Color GOPHER_COLOR_START = new JBColor(new Color(1, 173, 216), new Color(1, 173, 216));
@@ -62,11 +64,11 @@ public class GopherProgressBarUi extends BasicProgressBarUI {
     private volatile int velocity = 1;
 
     @Override
-    protected void paintIndeterminate(Graphics g2d, JComponent c) {
-        if (!(g2d instanceof Graphics2D)) {
+    protected void paintIndeterminate(Graphics g, JComponent c) {
+        if (!(g instanceof Graphics2D)) {
             return;
         }
-        Graphics2D g = (Graphics2D) g2d;
+        Graphics2D g2d = (Graphics2D) g;
 
         Insets b = progressBar.getInsets(); // area for border
         int barRectWidth = progressBar.getWidth() - (b.right + b.left);
@@ -76,28 +78,28 @@ public class GopherProgressBarUi extends BasicProgressBarUI {
             return;
         }
 
-        g.setColor(SHADES_OF_GREY);
+        g2d.setColor(SHADES_OF_GREY);
         int w = c.getWidth();
         int h = c.getPreferredSize().height;
         if (isOdd(c.getHeight() - h)) h++;
 
         LinearGradientPaint baseRainbowPaint = new LinearGradientPaint(0, JBUI.scale(2), 0, h - Y_CROP_POSITION, FRACTIONS, COLORS);
 
-        g.setPaint(baseRainbowPaint);
+        g2d.setPaint(baseRainbowPaint);
 
         if (c.isOpaque()) {
-            g.fillRect(0, (c.getHeight() - h) / 2, w, h);
+            g2d.fillRect(0, (c.getHeight() - h) / 2, w, h);
         }
-        g.setColor(SHADES_OF_GREY2);
-        final GraphicsConfig config = GraphicsUtil.setupAAPainting(g);
-        g.translate(0, (c.getHeight() - h) / 2);
+        g2d.setColor(SHADES_OF_GREY2);
+        final GraphicsConfig config = GraphicsUtil.setupAAPainting(g2d);
+        g2d.translate(0, (c.getHeight() - h) / 2);
 
-        Paint old = g.getPaint();
-        g.setPaint(baseRainbowPaint);
+        Paint old = g2d.getPaint();
+        g2d.setPaint(baseRainbowPaint);
 
         final Area containingRoundRect = new Area(new RoundRectangle2D.Float(1f, 1f, w - 2f, h - 2f, EIGHT_FLOAT, EIGHT_FLOAT));
-        g.fill(containingRoundRect);
-        g.setPaint(old);
+        g2d.fill(containingRoundRect);
+        g2d.setPaint(old);
         offset = (offset + 1) % JBUI.scale(16);
         offset2 += velocity;
         if (offset2 <= 2) {
@@ -110,34 +112,31 @@ public class GopherProgressBarUi extends BasicProgressBarUI {
 
         Area area = new Area(new Rectangle2D.Float(0, 0, w, h));
         area.subtract(new Area(new RoundRectangle2D.Float(1f, 1f, w - 2f, h - 2f, EIGHT_FLOAT, EIGHT_FLOAT)));
-        g.setPaint(Gray._128);
+        g2d.setPaint(Gray._128);
 
         if (c.isOpaque()) {
-            g.fill(area);
+            g2d.fill(area);
         }
 
         area.subtract(new Area(new RoundRectangle2D.Float(0, 0, w, h, NINE_FLOAT, NINE_FLOAT)));
 
         Container parent = c.getParent();
         Color background = parent != null ? parent.getBackground() : UIUtil.getPanelBackground();
-        g.setPaint(background);
+        g2d.setPaint(background);
 
         if (c.isOpaque()) {
-            g.fill(area);
+            g2d.fill(area);
         }
 
-        Icon scaledIcon = GopherIcons.GOPHER_ICON;
-        scaledIcon.paintIcon(progressBar, g, offset2 - JBUI.scale(10), -Y_CROP_POSITION);
-
-        g.draw(new RoundRectangle2D.Float(1f, 1f, w - 2f - 1f, h - 2f - 1f, EIGHT_FLOAT, EIGHT_FLOAT));
-        g.translate(0, -(c.getHeight() - h) / 2);
+        g2d.draw(new RoundRectangle2D.Float(1f, 1f, w - 2f - 1f, h - 2f - 1f, EIGHT_FLOAT, EIGHT_FLOAT));
+        GOPHER_ICON.paintIcon(progressBar, g2d, offset2 - JBUI.scale(10), -Y_CROP_POSITION);
 
         // Deal with possible text painting
         if (progressBar.isStringPainted()) {
             if (progressBar.getOrientation() == SwingConstants.HORIZONTAL) {
-                paintString(g, b.left, b.top, barRectWidth, barRectHeight, boxRect.x, boxRect.width);
+                paintString(g2d, b.left, b.top, barRectWidth, barRectHeight, boxRect.x, boxRect.width);
             } else {
-                paintString(g, b.left, b.top, barRectWidth, barRectHeight, boxRect.y, boxRect.height);
+                paintString(g2d, b.left, b.top, barRectWidth, barRectHeight, boxRect.y, boxRect.height);
             }
         }
         config.restore();
@@ -170,30 +169,27 @@ public class GopherProgressBarUi extends BasicProgressBarUI {
 
         Container parent = c.getParent();
         Color background = parent != null ? parent.getBackground() : UIUtil.getPanelBackground();
-
         g.setColor(background);
-        Graphics2D g2 = (Graphics2D) g;
+
+        Graphics2D g2d = (Graphics2D) g;
         if (c.isOpaque()) {
             g.fillRect(0, 0, w, h);
         }
 
-        g2.translate(0, (c.getHeight() - h) / 2);
-        g2.setColor(progressBar.getForeground());
-        g2.fill(new RoundRectangle2D.Float(0, 0, w - ONE_FLOAT, h - ONE_FLOAT, NINE_FLOAT, NINE_FLOAT));
-        g2.setColor(background);
-        g2.fill(new RoundRectangle2D.Float(ONE_FLOAT, ONE_FLOAT, w - 2f * ONE_FLOAT - ONE_FLOAT, h - 2f * ONE_FLOAT - ONE_FLOAT, EIGHT_FLOAT, EIGHT_FLOAT));
+        g2d.translate(0, (c.getHeight() - h) / 2);
+        g2d.setColor(progressBar.getForeground());
+        g2d.fill(new RoundRectangle2D.Float(0, 0, w - ONE_FLOAT, h - ONE_FLOAT, NINE_FLOAT, NINE_FLOAT));
+        g2d.setColor(background);
+        g2d.fill(new RoundRectangle2D.Float(ONE_FLOAT, ONE_FLOAT, w - 2f * ONE_FLOAT - ONE_FLOAT, h - 2f * ONE_FLOAT - ONE_FLOAT, EIGHT_FLOAT, EIGHT_FLOAT));
 
-        g2.setPaint(new LinearGradientPaint(0, JBUI.scale(2), 0, h - Y_CROP_POSITION, FRACTIONS, COLORS));
+        g2d.setPaint(new LinearGradientPaint(0, JBUI.scale(2), 0, h - Y_CROP_POSITION, FRACTIONS, COLORS));
+        g2d.fill(new RoundRectangle2D.Float(2f, 2f, amountFull - JBUIScale.scale(5f), h - JBUIScale.scale(5f), JBUIScale.scale(7f), JBUIScale.scale(7f)));
 
-        GopherIcons.GOPHER_ICON.paintIcon(progressBar, g2, amountFull - JBUI.scale(10), -Y_CROP_POSITION);
-        g2.fill(new RoundRectangle2D.Float(3f, 3f, amountFull - JBUIScale.scale(5f), h - JBUIScale.scale(5f), JBUIScale.scale(7f), JBUIScale.scale(7f)));
-        g2.translate(0, -(c.getHeight() - h) / 2);
+        GOPHER_ICON.paintIcon(progressBar, g2d, amountFull - JBUI.scale(10), -Y_CROP_POSITION);
 
         // Deal with possible text painting
         if (progressBar.isStringPainted()) {
-            paintString(g, b.left, b.top,
-                    barRectWidth, barRectHeight,
-                    amountFull, b);
+            paintString(g, b.left, b.top, barRectWidth, barRectHeight, amountFull, b);
         }
         config.restore();
     }
