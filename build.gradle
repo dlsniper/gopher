@@ -22,7 +22,7 @@ intellij {
 
 patchPluginXml {
     changeNotes """
-      2019.2.2: Correct layout for the progress bar. Misc internal changes.
+      2019.2.2: Correct layout for the progress bar. Misc internal changes.<br>
       2019.2.1: Added plugin icon.<br>
       2019.2: Initial release.<br>"""
 }
