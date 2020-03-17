@@ -1,29 +1,34 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.10'
+    id 'org.jetbrains.intellij' version '0.4.16'
 }
 
 group 'ro.florinpatan.gopher'
-version '2019.2.4'
+version '2020.1'
 
 sourceCompatibility = 1.8
 
 repositories {
+    maven { url "https://www.jetbrains.com/intellij-repository/releases" }
+    maven { url "https://www.jetbrains.com/intellij-repository/snapshots" }
+    maven { url "https://jetbrains.bintray.com/intellij-third-party-dependencies" }
     mavenCentral()
 }
+
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 intellij {
-    version '2019.2'
+    version '201.6487-EAP-CANDIDATE-SNAPSHOT'
 }
 
 patchPluginXml {
-    untilBuild '193.*'
+    untilBuild '201.*'
 
     changeNotes """
+      2020.1: Initial compatibility with 2020.1 branch<br>
       2019.2.4: Initial compatibility with 2019.3 branch<br>
       2019.2.3: Misc internal changes<br>
       2019.2.2: Correct layout for the progress bar. Misc internal changes<br>
