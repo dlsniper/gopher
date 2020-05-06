@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.16'
+    id 'org.jetbrains.intellij' version '0.4.19'
 }
 
 group 'ro.florinpatan.gopher'
@@ -21,7 +21,7 @@ dependencies {
 }
 
 intellij {
-    version '201.6487-EAP-CANDIDATE-SNAPSHOT'
+    version 'IU-2020.1'
 }
 
 patchPluginXml {
