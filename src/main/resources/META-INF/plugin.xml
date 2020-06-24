@@ -14,11 +14,9 @@
 
     <depends>com.intellij.modules.platform</depends>
 
-    <idea-version until-build="193." since-build="192.*"/>
+    <idea-version until-build="203." since-build="202.*"/>
 
-    <application-components>
-        <component>
-            <implementation-class>ro.florinpatan.gopher.GopherApplicationComponent</implementation-class>
-        </component>
-    </application-components>
+    <applicationListeners>
+        <listener class="ro.florinpatan.gopher.GopherApplicationComponent" topic="com.intellij.ide.ui.LafManagerListener"/>
+    </applicationListeners>
 </idea-plugin>
