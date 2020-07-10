@@ -27,7 +27,7 @@ patchPluginXml {
     untilBuild '202.*'
 
     changeNotes """
-      2020.2: Initial compatibility with 2020.2. This plugin now dynamic.<br>
+      2020.2: Initial compatibility with 2020.2.<br>
       2020.1: Initial compatibility with 2020.1 branch<br>
       2019.2.4: Initial compatibility with 2019.3 branch<br>
       2019.2.3: Misc internal changes<br>
