@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'ro.florinpatan.gopher'
-version '2020.2'
+version '2020.3'
 
 sourceCompatibility = 1.8
 
@@ -20,13 +20,14 @@ dependencies {
 }
 
 intellij {
-    version 'IU-202-EAP-SNAPSHOT'
+    version 'IU-2020.3'
 }
 
 patchPluginXml {
-    untilBuild '202.*'
+    untilBuild '211.*'
 
     changeNotes """
+      2020.3: Initial compatibility with 2020.3<br>
       2020.2: Initial compatibility with 2020.2<br>
       2020.1: Initial compatibility with 2020.1<br>
       2019.2.4: Initial compatibility with 2019.3<br>
