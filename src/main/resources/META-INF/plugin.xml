@@ -4,7 +4,7 @@
     <vendor email="florinpatan@gmail.com">Florin Pățan</vendor>
 
     <description><![CDATA[
-    The Gopher is here to enhance your Go (golang) development experience.<br>
+    The Gopher progress bar plugin is here to enhance your Go (golang) development experience by providing a suitable progress bar.<br>
     <br>
     <a href="https://www.jetbrains.com/go/learn/">Learn more about the IDE</a><br>
     <br>
@@ -14,7 +14,7 @@
 
     <depends>com.intellij.modules.platform</depends>
 
-    <idea-version until-build="211." since-build="202.*"/>
+    <idea-version until-build="311." since-build="202.*"/>
 
     <applicationListeners>
         <listener class="ro.florinpatan.gopher.GopherApplicationComponent" topic="com.intellij.ide.ui.LafManagerListener"/>

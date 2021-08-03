@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'ro.florinpatan.gopher'
-version '2020.3'
+version '2021.1'
 
 sourceCompatibility = 1.8
 
@@ -20,13 +20,14 @@ dependencies {
 }
 
 intellij {
-    version 'IU-2020.3'
+    version 'IU-2021.2'
 }
 
 patchPluginXml {
-    untilBuild '211.*'
+    untilBuild '311.*'
 
     changeNotes """
+      2021.1: Initial compatibility with 2021.*+<br>
       2020.3: Initial compatibility with 2020.3<br>
       2020.2: Initial compatibility with 2020.2<br>
       2020.1: Initial compatibility with 2020.1<br>
